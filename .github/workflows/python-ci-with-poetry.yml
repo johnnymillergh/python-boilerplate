@@ -7,6 +7,7 @@ on:
     branches:
       - 'main'
       - 'develop'
+      - 'feature/**'
       - 'release/**'
       - 'hotfix/**'
     paths-ignore:
@@ -45,6 +46,10 @@ jobs:
         run: env LOG_LEVEL=INFO poetry run pytest --quiet --cov --cov-report term -n auto --benchmark-disable
       - name: Python Benchmark with pytest
         run: env LOG_LEVEL=ERROR poetry run pytest --capture=no --log-cli-level=ERROR -n 0 --benchmark-only
+      - name: Run Python Application
+        run: |
+          poetry env activate
+          PYTHONPATH=`pwd` poetry run python3 src/python_boilerplate/__main__.py
   pyinstaller-smoke-test:
     needs: static-code-analysis
     runs-on: ubuntu-latest
