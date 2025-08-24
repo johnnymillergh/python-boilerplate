@@ -1,7 +1,6 @@
 [tool.poetry]
-package-mode = false
 name = "python-boilerplate"
-version = "8.0"
+version = "8.1-beta"
 description = "A boilerplate project for Python."
 authors = ["Johnny Miller <johnnysviva@outlook.com>"]
 license = "Apache-2.0"
