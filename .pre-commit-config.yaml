@@ -1,9 +1,9 @@
 # See https://pre-commit.com/ for usage and config
 fail_fast: true
 repos:
-  # https://github.com/pre-commit/pre-commit-hooks/releases/tag/v4.3.0
+  # https://github.com/pre-commit/pre-commit-hooks/releases/tag/v6.0.0
   - repo: https://github.com/pre-commit/pre-commit-hooks
-    rev: v4.4.0
+    rev: v6.0.0
     hooks:
       - id: check-ast
       - id: trailing-whitespace
@@ -21,14 +21,14 @@ repos:
     hooks:
       - id: poetry-check
         name: Poetry Check
-        stages: [ commit ]
+        stages: [ pre-commit ]
         language: python
         entry: poetry check
         pass_filenames: false
         files: ^(.*/)?(poetry\.lock|pyproject\.toml)$
       - id: ruff-format
         name: Ruff Check and Fix
-        stages: [ commit ]
+        stages: [ pre-commit ]
         language: system
         # Ruff checks and fixes Python code for both /src and /tests directories
         entry: poetry run ruff check .
@@ -37,14 +37,14 @@ repos:
           - "--fix"
       - id: mypy
         name: mypy
-        stages: [ commit ]
+        stages: [ pre-commit ]
         language: system
         entry: poetry run mypy
         types: [ python ]
         require_serial: true
       - id: pytest
         name: Pytest Unit Tests
-        stages: [ commit ]
+        stages: [ pre-commit ]
         language: system
         # https://github.com/pytest-dev/pytest/issues/5502#issuecomment-1020761655
         # Prevent Pytest logging error like: ValueError: I/O operation on closed file.
@@ -53,7 +53,7 @@ repos:
         pass_filenames: false
       - id: pytest-cov
         name: Pytest with Coverage
-        stages: [ push ]
+        stages: [ pre-push ]
         language: system
         # https://github.com/pytest-dev/pytest/issues/5502#issuecomment-1020761655
         # Prevent Pytest logging error like: ValueError: I/O operation on closed file.
