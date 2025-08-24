@@ -5,12 +5,12 @@ runs:
   steps:
     - name: Install Poetry
       shell: bash
-      run: pipx install poetry==1.8.5
+      run: pipx install poetry==2.1.4
     # The actions/cache step below uses this id to get the exact python version
     - id: setup-python
       uses: actions/setup-python@v5
       with:
-        python-version: "3.13.1"
+        python-version: "3.13.7"
         architecture: x64
         # https://github.com/actions/setup-python/blob/main/docs/advanced-usage.md#caching-packages
         cache: "poetry"
