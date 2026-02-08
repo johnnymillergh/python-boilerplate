@@ -23,7 +23,8 @@ Here are the highlights of **python_boilerplate**:
 
    `Python` - [![Python](https://img.shields.io/badge/Python-v3.13.7-blue)](https://www.python.org/downloads/release/python-3131/)
 
-   `Poetry` is to Python virtualenv management tool for the project.
+   `uv` is a fast Python package installer and dependency management tool for the project.
+
 
 2. Data validation using Python type hints with [Pydantic](https://github.com/pydantic/pydantic).
 
@@ -83,31 +84,32 @@ Here are the highlights of **python_boilerplate**:
 1. Setup the development environment
 
    ```shell
-   # Install pipx if not installed
-   $ python3 -m pip install pipx
-   $ python3 -m pipx ensurepath
+   # Install uv
+   $ curl -LsSf https://astral.sh/uv/install.sh | sh
 
-   # Install poetry using pipx, https://python-poetry.org/docs/#installing-with-pipx
-   $ pipx install poetry
+   # For Windows PowerShell
+   $ powershell -ExecutionPolicy ByPass -c "irm https://astral.sh/uv/install.ps1 | iex"
+   # Or use winget
+   $ winget install --id=astral-sh.uv
    ```
 
 2. Install dependencies, with optional dependency group `test`
 
    ```shell
-   $ poetry install --with test
+   $ uv sync --extra test --extra dev
    ```
 
 3. Install mypy types
 
    ```shell
-   $ poetry run mypy --install-types
+   $ uv run mypy --install-types
    ```
 
 4. Setup pre-commit and pre-push hooks
 
    ```shell
-   $ poetry run pre-commit install -t pre-commit
-   $ poetry run pre-commit install -t pre-push
+   $ uv run pre-commit install -t pre-commit
+   $ uv run pre-commit install -t pre-push
    ```
 
 ## Useful Commands
@@ -115,8 +117,43 @@ Here are the highlights of **python_boilerplate**:
 ### Run Python Module
 
 ```shell
-$ poetry env activate
 $ python3 -m python_boilerplate
+```
+
+### Run Python Script
+
+**Append your project's root directory to** `PYTHONPATH` — In any environment you wish to run your Python application such as Docker, vagrant or your virtual environment i.e. in bin/activate, run the below command:
+
+> [How to Fix ModuleNotFoundError and ImportError](https://towardsdatascience.com/how-to-fix-modulenotfounderror-and-importerror-248ce5b69b1c)
+
+For macOS or Linux,
+
+```shell
+# Ensure `pwd` is the root directory of the project
+$ PYTHONPATH=`pwd` uv run python3 python_boilerplate/demo/pandas_usage.py
+$ PYTHONPATH=`pwd` uv run python3 python_boilerplate/demo/multithread_and_thread_pool_usage.py
+
+# Run the main module
+$ PYTHONPATH=`pwd` uv run python3 python_boilerplate/__main__.py
+
+# Run a pytest script
+$ pytest --log-cli-level=DEBUG --capture=no tests/common/test_debounce_throttle.py
+
+# Run a pytest script with `-k` EXPRESSION
+$ pytest --log-cli-level=DEBUG --capture=no tests/common/test_debounce_throttle.py -k 'test_debounce'
+
+# For more details of pytest command
+$ uv run pytest --help
+```
+
+For Windows Terminal,
+```powershell
+# Ensure `$PWD.Path` is the root directory of the project
+$ $env:PYTHONPATH=$PWD.Path; uv run python .\python_boilerplate\demo\pandas_usage.py
+$ $env:PYTHONPATH=$PWD.Path; uv run python .\python_boilerplate\demo\multithread_and_thread_pool_usage.py
+
+# Run the main module
+$ $env:PYTHONPATH=$PWD.Path; uv run python .\python_boilerplate\__main__.py
 ```
 
 ### Run Python Script
@@ -172,7 +209,7 @@ $ $env:PYTHONPATH=$PWD.Path; poetry run python .\python_boilerplate\__main__.py
 
 Build artifact with macOS or Linux,
 ```shell
-$ poetry run pyinstaller --console \
+$ uv run pyinstaller --console \
 --add-data "pyproject.toml:." \
 --add-data "src/python_boilerplate/resources/*:python_boilerplate/resources" \
 --name pandas_usage \
@@ -181,7 +218,7 @@ $ poetry run pyinstaller --console \
 
 On Windows,
 ```powershell
-$ poetry run pyinstaller --console `
+$ uv run pyinstaller --console `
 --add-data "pyproject.toml;." `
 --add-data "src/python_boilerplate/resources/*;python_boilerplate/resources" `
 --name multithread_and_thread_pool_usage `
@@ -193,13 +230,13 @@ $ poetry run pyinstaller --console `
 Run with pytest, analyze code coverage, generate HTML code coverage reports, fail the test if coverage percentage is under 90%,
 
 ```shell
-$ poetry run pytest --cov --cov-report html --cov-fail-under=85 --capture=no --log-cli-level=INFO
+$ uv run pytest --cov --cov-report html --cov-fail-under=85 --capture=no --log-cli-level=INFO
 ```
 
 Benchmark with pytest,
 
 ```shell
-$ poetry run pytest --capture=no --log-cli-level=ERROR -n 0 --benchmark-only
+$ uv run pytest --capture=no --log-cli-level=ERROR -n 0 --benchmark-only
 ```
 
 ### Conventional Changelog CLI
@@ -225,7 +262,7 @@ $ poetry run pytest --capture=no --log-cli-level=ERROR -n 0 --benchmark-only
 ### Check Versions of Python Packages
 
 ```shell
-$ poetry run pip list --outdated
+$ uv pip list --outdated
 ```
 
 Output be like,
