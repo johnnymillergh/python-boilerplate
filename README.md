@@ -117,7 +117,7 @@ Here are the highlights of **python_boilerplate**:
 ### Run Python Module
 
 ```shell
-$ python3 -m python_boilerplate
+$ uv run python -m python_boilerplate
 ```
 
 ### Run Python Script

@@ -57,6 +57,11 @@ Repository = "https://github.com/johnnymillergh/python-boilerplate.git"
 requires = ["setuptools>=61.0", "wheel"]
 build-backend = "setuptools.build_meta"
 
+[tool.setuptools]
+package-dir = {"" = "src"}
+[tool.setuptools.packages.find]
+where = ["src"]
+
 [tool.mypy]
 files = ["src", "tests"]
 cache_dir = "./build/.mypy_cache"
@@ -123,7 +128,7 @@ lint.ignore = [
 line-length = 120
 show-fixes = true
 src = ["src", "tests"]
-target-version = "py39"
+target-version = "py313"
 respect-gitignore = true
 
 
