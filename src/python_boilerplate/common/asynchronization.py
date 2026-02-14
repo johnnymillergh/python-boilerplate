@@ -4,8 +4,9 @@ import asyncio
 import functools
 import inspect
 from asyncio import Task
+from collections.abc import Callable
 from concurrent.futures import Future
-from typing import Any, Callable, TypeVar
+from typing import Any
 
 from loguru import logger
 
@@ -32,10 +33,7 @@ def done_callback(future: Future[Any] | Task[Any]) -> None:
         )
 
 
-R = TypeVar("R")
-
-
-def async_function(func: Callable[..., R]) -> Callable[..., Future[R]]:
+def async_function[R](func: Callable[..., R]) -> Callable[..., Future[R]]:
     """
     An easy way to implement multi-tread feature with thread pool.
 

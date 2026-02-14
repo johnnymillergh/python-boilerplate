@@ -34,10 +34,8 @@ repos:
         stages: [ pre-commit ]
         language: system
         # Ruff checks and fixes Python code for both /src and /tests directories
-        entry: uv run ruff check
+        entry: uv run ruff check --fix
         types: [ python ]
-        args:
-          - "--fix"
       - id: ruff-format
         name: Ruff Format
         stages: [ pre-commit ]

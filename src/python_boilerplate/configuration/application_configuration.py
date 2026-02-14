@@ -1,7 +1,7 @@
+import tomllib
 from pathlib import Path
 from typing import Final
 
-import tomllib
 from loguru import logger
 from pyhocon import ConfigFactory
 

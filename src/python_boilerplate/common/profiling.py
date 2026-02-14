@@ -1,9 +1,9 @@
 import functools
 import os
 import time
-from collections.abc import Coroutine
+from collections.abc import Callable, Coroutine
 from datetime import timedelta
-from typing import Any, Callable, TypeVar
+from typing import Any, TypeVar
 
 import psutil
 from loguru import logger

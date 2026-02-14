@@ -24,7 +24,7 @@ def pytest_html_report_title(report: Any) -> None:
 
 
 @pytest.fixture(autouse=True)
-def auto_profile(request: Any) -> Generator[Any, Any, None]:
+def auto_profile(request: Any) -> Generator[Any, Any]:
     """
     Generate an HTML file for each test node in your test suite inside the .profiles directory.
 
