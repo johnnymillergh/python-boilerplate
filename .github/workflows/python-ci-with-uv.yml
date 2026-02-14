@@ -33,7 +33,7 @@ jobs:
   static-code-analysis:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
       - uses: ./.github/actions/project-environment-setup
       - run: uv run ruff check .
       - name: Install mypy types
@@ -53,7 +53,7 @@ jobs:
     needs: static-code-analysis
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
       - uses: ./.github/actions/project-environment-setup
       - name: Build Application Executable Package with PyInstaller
         run: |
@@ -71,7 +71,7 @@ jobs:
     needs: static-code-analysis
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
       - name: Build Docker Image
         run: |
           docker build . -t python_boilerplate:smoke-test-tag
@@ -84,7 +84,7 @@ jobs:
   check-versions:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
       - uses: ./.github/actions/project-environment-setup
       - name: Check Versions of Python Packages
         run: |

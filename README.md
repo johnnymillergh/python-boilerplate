@@ -21,7 +21,7 @@ Here are the highlights of **python_boilerplate**:
 
 1. Inherited from modern and the latest Python technologies:
 
-   `Python` - [![Python](https://img.shields.io/badge/Python-v3.13.7-blue)](https://www.python.org/downloads/release/python-3131/)
+   `Python` - [![Python](https://img.shields.io/badge/Python-v3.13-blue)](https://www.python.org/downloads/)
 
    `uv` is a fast Python package installer and dependency management tool for the project.
 
@@ -44,21 +44,17 @@ Here are the highlights of **python_boilerplate**:
 
 10. Testing with [pytest](https://docs.pytest.org/en/latest/), integrating [pytest-mock](https://pypi.org/project/pytest-mock/) for mocking, [pytest-cov](https://pypi.org/project/pytest-cov/) for code coverage analysis and [pyinstrument](https://github.com/joerick/pyinstrument) for Python stack profiler.
 
-11. Formatting with [black](https://github.com/psf/black).
+11. Linting, formatting, and import sorting with [Ruff](https://docs.astral.sh/ruff/).
 
-12. Import sorting with [isort](https://github.com/timothycrosley/isort).
+12. Static typing with [mypy](http://mypy-lang.org/).
 
-13. Static typing with [mypy](http://mypy-lang.org/).
+13. Git hooks that run all the above with [pre-commit](https://pre-commit.com/).
 
-14. Linting with [flake8](http://flake8.pycqa.org/en/latest/).
+14. Deployment ready with [Docker](https://docker.com/).
 
-15. Git hooks that run all the above with [pre-commit](https://pre-commit.com/).
+15. Continuous Integration with [GitHub Actions](https://github.com/features/actions).
 
-16. Deployment ready with [Docker](https://docker.com/).
-
-17. Continuous Integration with [GitHub Actions](https://github.com/features/actions).
-
-18. Loguru logging configuration. The log sample,
+16. Loguru logging configuration. The log sample,
 
    ```
    2022-09-17 14:13:52.385 | ⚠️ WARNING  | 6860 | MainThread      | python_boilerplate.repository.model.base_model.<module>:24 - SQLite database created. Path: [/Users/johnny/Projects/PyCharmProjects/python_boilerplate/data/python_boilerplate.db], <peewee.SqliteDatabase object at 0x1191e1390>
@@ -154,42 +150,6 @@ $ $env:PYTHONPATH=$PWD.Path; uv run python .\python_boilerplate\demo\multithread
 
 # Run the main module
 $ $env:PYTHONPATH=$PWD.Path; uv run python .\python_boilerplate\__main__.py
-```
-
-### Run Python Script
-
-**Append your project’s root directory to** `PYTHONPATH` — In any environment you wish to run your Python application such as Docker, vagrant or your virtual environment i.e. in bin/activate, run the below command:
-
-> [How to Fix ModuleNotFoundError and ImportError](https://towardsdatascience.com/how-to-fix-modulenotfounderror-and-importerror-248ce5b69b1c)
-
-For macOS or Linux,
-
-```shell
-# Ensure `pwd` is the root directory of the project
-$ PYTHONPATH=`pwd` poetry run python3 python_boilerplate/demo/pandas_usage.py
-$ PYTHONPATH=`pwd` poetry run python3 python_boilerplate/demo/multithread_and_thread_pool_usage.py
-
-# Run the main module
-$ PYTHONPATH=`pwd` poetry run python3 python_boilerplate/__main__.py
-
-# Run a pytest script
-$ pytest --log-cli-level=DEBUG --capture=no tests/common/test_debounce_throttle.py
-
-# Run a pytest script with `-k` EXPRESSION
-$ pytest --log-cli-level=DEBUG --capture=no tests/common/test_debounce_throttle.py -k 'test_debounce'
-
-# For more details of pytest command
-$ poetry run pytest --help
-```
-
-For Windows Terminal,
-```powershell
-# Ensure `$PWD.Path` is the root directory of the project
-$ $env:PYTHONPATH=$PWD.Path; poetry run python .\python_boilerplate\demo\pandas_usage.py
-$ $env:PYTHONPATH=$PWD.Path; poetry run python .\python_boilerplate\demo\multithread_and_thread_pool_usage.py
-
-# Run the main module
-$ $env:PYTHONPATH=$PWD.Path; poetry run python .\python_boilerplate\__main__.py
 ```
 
 ### Package with [PyInstaller](https://pyinstaller.org/en/latest/usage.html?highlight=pythonpath#using-pyinstaller)
