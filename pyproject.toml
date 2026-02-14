@@ -149,6 +149,7 @@ max-complexity = 10
     "ANN",
     "ARG",
     "INP001",
+    "PLC0415",
     "S101",
 ]
 
