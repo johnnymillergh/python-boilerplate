@@ -15,7 +15,7 @@ times_for_throttle2: int = 0
 
 
 def test_debounce(mocker: MockFixture) -> None:
-    import test_python_boilerplate
+    import test_python_boilerplate.common.test_debounce_throttle
 
     spy = mocker.spy(test_python_boilerplate.common.test_debounce_throttle, "debounce_function")
     call_count: int = 3
@@ -38,7 +38,7 @@ def test_debounce(mocker: MockFixture) -> None:
 
 
 def test_throttle(mocker: MockFixture) -> None:
-    import test_python_boilerplate
+    import test_python_boilerplate.common.test_debounce_throttle
 
     spy = mocker.spy(test_python_boilerplate.common.test_debounce_throttle, "throttle_function")
     call_count: int = 5

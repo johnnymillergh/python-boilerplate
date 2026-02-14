@@ -150,6 +150,7 @@ max-complexity = 10
     "ARG",
     "INP001",
     "PLC0415",
+    "PLW0406",
     "S101",
 ]
 
