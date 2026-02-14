@@ -1,3 +1,4 @@
+import sys
 from time import sleep
 
 import pytest
@@ -31,16 +32,8 @@ def timed_job_with_args(a_int: int, a_string: str) -> None:
 def test_scheduler_when_adding_in_interval_job(mocker: MockFixture) -> None:
     if not scheduler.running:
         scheduler.start()
-    import test_python_boilerplate.configuration.test_apscheduler_configuration
-
-    timed_job_spy = mocker.spy(
-        test_python_boilerplate.configuration.test_apscheduler_configuration,
-        "timed_job",
-    )
-    timed_job_with_args_spy = mocker.spy(
-        test_python_boilerplate.configuration.test_apscheduler_configuration,
-        "timed_job_with_args",
-    )
+    timed_job_spy = mocker.spy(sys.modules[__name__], "timed_job")
+    timed_job_with_args_spy = mocker.spy(sys.modules[__name__], "timed_job_with_args")
     try:
         scheduler.add_job(func=timed_job, trigger="interval", seconds=1)
         scheduler.add_job(func=timed_job_with_args, trigger="interval", seconds=1, args=(200, "OK"))
