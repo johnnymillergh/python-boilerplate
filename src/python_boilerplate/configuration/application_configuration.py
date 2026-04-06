@@ -1,7 +1,7 @@
+import tomllib
 from pathlib import Path
 from typing import Final
 
-import tomllib
 from loguru import logger
 from pyhocon import ConfigFactory
 
@@ -32,7 +32,7 @@ with _pyproject_toml_file.open("rb") as file:
 
 def configure() -> None:
     """Configure application."""
-    logger.warning(f"Application configuration loaded, {application_conf}, {pyproject_toml['tool']['poetry']['name']}")
+    logger.warning(f"Application configuration loaded, {application_conf}, {pyproject_toml['project']['name']}")
 
 
 if __name__ == "__main__":

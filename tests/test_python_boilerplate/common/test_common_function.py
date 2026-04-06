@@ -1,3 +1,5 @@
+import getpass
+
 from loguru import logger
 from pytest_benchmark.fixture import BenchmarkFixture
 from pytest_mock import MockerFixture
@@ -21,8 +23,6 @@ def test_get_cpu_count_when_cpu_count_is_none_then_returns_4(
 
 def test_get_login_user(mocker: MockerFixture) -> None:
     # pytest-mock, spy, https://pytest-mock.readthedocs.io/en/latest/usage.html#spy
-    import getpass
-
     spy = mocker.spy(getpass, "getuser")
     login_user = get_login_user()
     assert len(login_user) > 0

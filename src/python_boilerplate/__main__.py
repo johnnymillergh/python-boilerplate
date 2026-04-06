@@ -70,8 +70,7 @@ def startup() -> None:
     save(StartupLog(command_line=" ".join(sys.argv)))
 
     elapsed = time.perf_counter() - __start_time
-    logger.info(f"Started {get_module_name()}@{pyproject_toml['tool']['poetry']['version']} in "
-                f"{timedelta(seconds=elapsed)}")
+    logger.info(f"Started {get_module_name()}@{pyproject_toml['project']['version']} in {timedelta(seconds=elapsed)}")
 
 
 @atexit.register

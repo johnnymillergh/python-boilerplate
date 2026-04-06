@@ -3,5 +3,5 @@
 
 # ... except for dependencies and source
 !pyproject.toml
-!poetry.lock
+!uv.lock
 !src/

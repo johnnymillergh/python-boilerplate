@@ -1,4 +1,4 @@
-name: Python CI with Poetry
+name: Python CI with uv
 
 on:
   pull_request:
@@ -33,32 +33,31 @@ jobs:
   static-code-analysis:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
       - uses: ./.github/actions/project-environment-setup
-      - run: poetry run ruff check .
+      - run: uv run ruff check .
       - name: Install mypy types
         run: |
-          yes | poetry run mypy --install-types \
+          yes | uv run mypy --install-types \
           || test $? -eq 2 && echo "Installed mypy types successfully" \
           || echo "Failed to install mypy types"
-      - run: poetry run mypy
+      - run: uv run mypy
       - name: Python Tests with pytest
-        run: env LOG_LEVEL=INFO poetry run pytest --quiet --cov --cov-report term -n auto --benchmark-disable
+        run: env LOG_LEVEL=INFO uv run pytest --quiet --cov --cov-report term -n auto --benchmark-disable
       - name: Python Benchmark with pytest
-        run: env LOG_LEVEL=ERROR poetry run pytest --capture=no --log-cli-level=ERROR -n 0 --benchmark-only
+        run: env LOG_LEVEL=ERROR uv run pytest --capture=no --log-cli-level=ERROR -n 0 --benchmark-only
       - name: Run Python Application
         run: |
-          poetry env activate
-          PYTHONPATH=`pwd` poetry run python3 src/python_boilerplate/__main__.py
+          PYTHONPATH=`pwd` uv run python3 src/python_boilerplate/__main__.py
   pyinstaller-smoke-test:
     needs: static-code-analysis
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
       - uses: ./.github/actions/project-environment-setup
       - name: Build Application Executable Package with PyInstaller
         run: |
-          poetry run pyinstaller --windowed --noconsole \
+          uv run pyinstaller --windowed --noconsole \
             --add-data "pyproject.toml:." \
             --add-data "src/python_boilerplate/resources/*:python_boilerplate/resources" \
             --name multithread_and_thread_pool_usage \
@@ -72,7 +71,7 @@ jobs:
     needs: static-code-analysis
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
       - name: Build Docker Image
         run: |
           docker build . -t python_boilerplate:smoke-test-tag
@@ -85,11 +84,11 @@ jobs:
   check-versions:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
       - uses: ./.github/actions/project-environment-setup
       - name: Check Versions of Python Packages
         run: |
-          output=$(poetry run pip list --outdated)
+          output=$(uv pip list --outdated)
           if [ -z "$output" ]
           then
               echo "🎉 Congrats! Everything is up-to-date"
