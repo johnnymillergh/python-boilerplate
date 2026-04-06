@@ -1,3 +1,11 @@
+# [8.2](https://github.com/johnnymillergh/python_boilerplate/compare/8.1...8.2) (2026-04-06)
+
+
+### Features
+
+* migrate from Poetry to uv for dependency management ([c8fd5305](https://github.com/johnnymillergh/python-boilerplate/commit/c8fd5305ab1cf8c3053515c4c756e40e333c18a4))
+
+
 # [8.0](https://github.com/johnnymillergh/python_boilerplate/compare/7.6...8.0) (2025-01-05)
 
 
