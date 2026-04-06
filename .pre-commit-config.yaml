@@ -1,5 +1,9 @@
 # See https://pre-commit.com/ for usage and config
-fail_fast: true
+exclude: |
+  (?x)^(
+      .venv/|
+      .sqlite3
+  )$^
 repos:
   # https://github.com/pre-commit/pre-commit-hooks/releases/tag/v6.0.0
   - repo: https://github.com/pre-commit/pre-commit-hooks
@@ -19,27 +23,31 @@ repos:
       - id: check-case-conflict
   - repo: local
     hooks:
-      - id: poetry-check
-        name: Poetry Check
+      - id: ruff-fix-imports
+        name: Ruff Fix Imports
         stages: [ pre-commit ]
-        language: python
-        entry: poetry check
-        pass_filenames: false
-        files: ^(.*/)?(poetry\.lock|pyproject\.toml)$
-      - id: ruff-format
+        language: system
+        entry: uv run ruff check --select I --fix
+        types: [ python ]
+      - id: ruff-check-fix
         name: Ruff Check and Fix
         stages: [ pre-commit ]
         language: system
         # Ruff checks and fixes Python code for both /src and /tests directories
-        entry: poetry run ruff check .
+        entry: uv run ruff check --fix
         types: [ python ]
-        args:
-          - "--fix"
+      - id: ruff-format
+        name: Ruff Format
+        stages: [ pre-commit ]
+        language: system
+        # Ruff checks and fixes Python code for both /src and /tests directories
+        entry: uv run ruff format
+        types: [ python ]
       - id: mypy
         name: mypy
         stages: [ pre-commit ]
         language: system
-        entry: poetry run mypy
+        entry: uv run mypy
         types: [ python ]
         require_serial: true
       - id: pytest
@@ -48,7 +56,7 @@ repos:
         language: system
         # https://github.com/pytest-dev/pytest/issues/5502#issuecomment-1020761655
         # Prevent Pytest logging error like: ValueError: I/O operation on closed file.
-        entry: env LOG_LEVEL=DEBUG poetry run pytest --cov --cov-report html --html=./build/.pytest_report/report.html --self-contained-html --log-cli-level=DEBUG -n auto --benchmark-disable
+        entry: env LOG_LEVEL=DEBUG uv run pytest --cov --cov-report html --html=./build/.pytest_report/report.html --self-contained-html --log-cli-level=DEBUG -n auto --benchmark-disable
         types: [ python ]
         pass_filenames: false
       - id: pytest-cov
@@ -57,6 +65,6 @@ repos:
         language: system
         # https://github.com/pytest-dev/pytest/issues/5502#issuecomment-1020761655
         # Prevent Pytest logging error like: ValueError: I/O operation on closed file.
-        entry: env LOG_LEVEL=ERROR poetry run pytest --cov --cov-fail-under=90 --capture=no --log-cli-level=ERROR -n auto
+        entry: env LOG_LEVEL=ERROR uv run pytest --cov --cov-fail-under=90 --capture=no --log-cli-level=ERROR -n auto
         types: [ python ]
         pass_filenames: false

@@ -1,3 +1,4 @@
+import sys
 from time import sleep
 
 import pytest
@@ -15,9 +16,7 @@ times_for_throttle2: int = 0
 
 
 def test_debounce(mocker: MockFixture) -> None:
-    import test_python_boilerplate
-
-    spy = mocker.spy(test_python_boilerplate.common.test_debounce_throttle, "debounce_function")
+    spy = mocker.spy(sys.modules[__name__], "debounce_function")
     call_count: int = 3
     while call_count > 0:
         debounce_function(call_count)
@@ -38,9 +37,7 @@ def test_debounce(mocker: MockFixture) -> None:
 
 
 def test_throttle(mocker: MockFixture) -> None:
-    import test_python_boilerplate
-
-    spy = mocker.spy(test_python_boilerplate.common.test_debounce_throttle, "throttle_function")
+    spy = mocker.spy(sys.modules[__name__], "throttle_function")
     call_count: int = 5
     try:
         while call_count > 0:

@@ -24,12 +24,20 @@ def pytest_html_report_title(report: Any) -> None:
 
 
 @pytest.fixture(autouse=True)
-def auto_profile(request: Any) -> Generator[Any, Any, None]:
+def auto_profile(request: Any) -> Generator[Any, Any]:
     """
     Generate an HTML file for each test node in your test suite inside the .profiles directory.
 
+    Skips profiling for benchmark tests to avoid incompatibility between pyinstrument's
+    C-level ProfilerState and pytest-benchmark's PauseInstrumentation (which calls
+    ``sys.setprofile()`` with the non-callable ProfilerState object).
+
     https://pyinstrument.readthedocs.io/en/latest/guide.html#profile-pytest-tests
     """
+    if "benchmark" in request.fixturenames:
+        yield
+        return
+
     profile_root = PROJECT__ROOT / "build/.profiles"
     logger.info("Starting to profile Pytest unit tests...")
     # Turn profiling on

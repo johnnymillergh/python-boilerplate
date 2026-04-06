@@ -1,67 +1,66 @@
-[tool.poetry]
+[project]
 name = "python-boilerplate"
-version = "8.1"
+version = "8.2"
 description = "A boilerplate project for Python."
-authors = ["Johnny Miller <johnnysviva@outlook.com>"]
-license = "Apache-2.0"
+authors = [
+    { name = "Johnny Miller", email = "johnnysviva@outlook.com" }
+]
+license = { text = "Apache-2.0" }
 readme = "README.md"
-homepage = "https://github.com/johnnymillergh/python-boilerplate/"
-repository = "https://github.com/johnnymillergh/python-boilerplate.git"
 keywords = ["python", "boilerplate"]
-packages = [
-    { include = "python_boilerplate", from = "src" }
+requires-python = ">=3.14.3,<3.15"
+dependencies = [
+    "pydantic==2.12.5",
+    "loguru==0.7.3",
+    "pyhocon==0.3.61",
+    "numpy==2.4.4",
+    "pandas==3.0.2",
+    "arrow==1.4.0",
+    "tzlocal==5.3.1",
+    "peewee==4.0.4",
+    "jinja2==3.1.6",
+    "faker==40.12.0",
+    "python-stdnum==2.2",
+    "tenacity==9.1.4",
+    "matplotlib==3.10.8",
+    "psutil==7.2.2",
+    "apscheduler==3.11.2",
+    "humanize==4.15.0",
 ]
 
+[project.optional-dependencies]
+dev = [
+    "mypy==1.20.0",
+    "pre-commit==4.5.1",
+    "pyinstrument==5.1.2",
+    "pyinstaller==6.19.0",
+]
+linter = [
+    "ruff==0.15.9",
+]
+test = [
+    "pytest==9.0.2",
+    "pytest-mock==3.15.1",
+    "pytest-cov==7.1.0",
+    "pytest-html==4.2.0",
+    "pytest-xdist==3.8.0",
+    "pytest-asyncio==1.3.0",
+    "pytest-benchmark==5.2.3",
+    "pytest-monitor==1.6.6",
+]
+
+[project.urls]
+Homepage = "https://github.com/johnnymillergh/python-boilerplate/"
+Repository = "https://github.com/johnnymillergh/python-boilerplate.git"
 
 [build-system]
-requires = ["poetry-core"]
-build-backend = "poetry.core.masonry.api"
+requires = ["setuptools>=61.0", "wheel"]
+build-backend = "setuptools.build_meta"
 
-
-[tool.poetry.dependencies]
-python = ">=3.13.1,<3.14"
-pydantic = "==2.11.7"
-loguru = "==0.7.3"
-pyhocon = "==0.3.61"
-numpy = "==2.3.2"
-pandas = "==2.3.2"
-arrow = "==1.3.0"
-tzlocal = "==5.2"
-peewee = "==3.18.2"
-jinja2 = "==3.1.6"
-faker = "==37.5.3"
-python-stdnum = "==2.1"
-tenacity = "==9.1.2"
-matplotlib = "==3.10.5"
-psutil = "==7.0.0"
-apscheduler = "==3.11.0"
-humanize = "==4.12.3"
-
-
-[tool.poetry.group.dev.dependencies]
-mypy = "==1.17.1"
-pre-commit = "==4.0.1"
-pyinstrument = "==5.1.1"
-pyinstaller = "==6.15.0"
-
-
-[tool.poetry.group.linter.dependencies]
-ruff = "==0.8.6"
-
-
-[tool.poetry.group.test]
-optional = true
-
-
-[tool.poetry.group.test.dependencies]
-pytest = "==8.3.4"
-pytest-mock = "==3.14.0"
-pytest-cov = "==6.0.0"
-pytest-html = "==4.1.1"
-pytest-xdist = "==3.6.1"
-pytest-asyncio = "==0.25.1"
-pytest-benchmark = "==5.1.0"
-pytest-monitor = "==1.6.6"
+[tool.setuptools]
+package-dir = {"" = "src"}
+[tool.setuptools.packages.find]
+where = ["src"]
 
 [tool.mypy]
 files = ["src", "tests"]
@@ -88,12 +87,9 @@ warn_required_dynamic_aliases = true
 warn_untyped_fields = true
 
 
-[tool.pytest]
-testpaths = ["tests", ]
-cache_dir = "./build/.pytest_cache"
-
-
 [tool.pytest.ini_options]
+testpaths = ["tests"]
+cache_dir = "./build/.pytest_cache"
 pythonpath = [
     "src"
 ]
@@ -128,12 +124,13 @@ lint.ignore = [
 ]
 line-length = 120
 show-fixes = true
-src = ["src", ]
-target-version = "py39"
+src = ["src", "tests"]
+target-version = "py313"
+respect-gitignore = true
 
 
 [tool.ruff.lint.flake8-copyright]
-author = "Lari Liuhamo"
+author = "Johnny Miller"
 
 
 [tool.ruff.lint.flake8-quotes]

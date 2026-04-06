@@ -21,9 +21,10 @@ Here are the highlights of **python_boilerplate**:
 
 1. Inherited from modern and the latest Python technologies:
 
-   `Python` - [![Python](https://img.shields.io/badge/Python-v3.13.7-blue)](https://www.python.org/downloads/release/python-3131/)
+   `Python` - [![Python](https://img.shields.io/badge/Python-v3.13-blue)](https://www.python.org/downloads/)
 
-   `Poetry` is to Python virtualenv management tool for the project.
+   `uv` is a fast Python package installer and dependency management tool for the project.
+
 
 2. Data validation using Python type hints with [Pydantic](https://github.com/pydantic/pydantic).
 
@@ -43,21 +44,17 @@ Here are the highlights of **python_boilerplate**:
 
 10. Testing with [pytest](https://docs.pytest.org/en/latest/), integrating [pytest-mock](https://pypi.org/project/pytest-mock/) for mocking, [pytest-cov](https://pypi.org/project/pytest-cov/) for code coverage analysis and [pyinstrument](https://github.com/joerick/pyinstrument) for Python stack profiler.
 
-11. Formatting with [black](https://github.com/psf/black).
+11. Linting, formatting, and import sorting with [Ruff](https://docs.astral.sh/ruff/).
 
-12. Import sorting with [isort](https://github.com/timothycrosley/isort).
+12. Static typing with [mypy](http://mypy-lang.org/).
 
-13. Static typing with [mypy](http://mypy-lang.org/).
+13. Git hooks that run all the above with [pre-commit](https://pre-commit.com/).
 
-14. Linting with [flake8](http://flake8.pycqa.org/en/latest/).
+14. Deployment ready with [Docker](https://docker.com/).
 
-15. Git hooks that run all the above with [pre-commit](https://pre-commit.com/).
+15. Continuous Integration with [GitHub Actions](https://github.com/features/actions).
 
-16. Deployment ready with [Docker](https://docker.com/).
-
-17. Continuous Integration with [GitHub Actions](https://github.com/features/actions).
-
-18. Loguru logging configuration. The log sample,
+16. Loguru logging configuration. The log sample,
 
    ```
    2022-09-17 14:13:52.385 | ⚠️ WARNING  | 6860 | MainThread      | python_boilerplate.repository.model.base_model.<module>:24 - SQLite database created. Path: [/Users/johnny/Projects/PyCharmProjects/python_boilerplate/data/python_boilerplate.db], <peewee.SqliteDatabase object at 0x1191e1390>
@@ -83,31 +80,32 @@ Here are the highlights of **python_boilerplate**:
 1. Setup the development environment
 
    ```shell
-   # Install pipx if not installed
-   $ python3 -m pip install pipx
-   $ python3 -m pipx ensurepath
+   # Install uv
+   $ curl -LsSf https://astral.sh/uv/install.sh | sh
 
-   # Install poetry using pipx, https://python-poetry.org/docs/#installing-with-pipx
-   $ pipx install poetry
+   # For Windows PowerShell
+   $ powershell -ExecutionPolicy ByPass -c "irm https://astral.sh/uv/install.ps1 | iex"
+   # Or use winget
+   $ winget install --id=astral-sh.uv
    ```
 
 2. Install dependencies, with optional dependency group `test`
 
    ```shell
-   $ poetry install --with test
+   $ uv sync --extra test --extra dev
    ```
 
 3. Install mypy types
 
    ```shell
-   $ poetry run mypy --install-types
+   $ uv run mypy --install-types
    ```
 
 4. Setup pre-commit and pre-push hooks
 
    ```shell
-   $ poetry run pre-commit install -t pre-commit
-   $ poetry run pre-commit install -t pre-push
+   $ uv run pre-commit install -t pre-commit
+   $ uv run pre-commit install -t pre-push
    ```
 
 ## Useful Commands
@@ -115,13 +113,12 @@ Here are the highlights of **python_boilerplate**:
 ### Run Python Module
 
 ```shell
-$ poetry env activate
-$ python3 -m python_boilerplate
+$ uv run python -m python_boilerplate
 ```
 
 ### Run Python Script
 
-**Append your project’s root directory to** `PYTHONPATH` — In any environment you wish to run your Python application such as Docker, vagrant or your virtual environment i.e. in bin/activate, run the below command:
+**Append your project's root directory to** `PYTHONPATH` — In any environment you wish to run your Python application such as Docker, vagrant or your virtual environment i.e. in bin/activate, run the below command:
 
 > [How to Fix ModuleNotFoundError and ImportError](https://towardsdatascience.com/how-to-fix-modulenotfounderror-and-importerror-248ce5b69b1c)
 
@@ -129,11 +126,11 @@ For macOS or Linux,
 
 ```shell
 # Ensure `pwd` is the root directory of the project
-$ PYTHONPATH=`pwd` poetry run python3 python_boilerplate/demo/pandas_usage.py
-$ PYTHONPATH=`pwd` poetry run python3 python_boilerplate/demo/multithread_and_thread_pool_usage.py
+$ PYTHONPATH=`pwd` uv run python3 python_boilerplate/demo/pandas_usage.py
+$ PYTHONPATH=`pwd` uv run python3 python_boilerplate/demo/multithread_and_thread_pool_usage.py
 
 # Run the main module
-$ PYTHONPATH=`pwd` poetry run python3 python_boilerplate/__main__.py
+$ PYTHONPATH=`pwd` uv run python3 python_boilerplate/__main__.py
 
 # Run a pytest script
 $ pytest --log-cli-level=DEBUG --capture=no tests/common/test_debounce_throttle.py
@@ -142,17 +139,17 @@ $ pytest --log-cli-level=DEBUG --capture=no tests/common/test_debounce_throttle.
 $ pytest --log-cli-level=DEBUG --capture=no tests/common/test_debounce_throttle.py -k 'test_debounce'
 
 # For more details of pytest command
-$ poetry run pytest --help
+$ uv run pytest --help
 ```
 
 For Windows Terminal,
 ```powershell
 # Ensure `$PWD.Path` is the root directory of the project
-$ $env:PYTHONPATH=$PWD.Path; poetry run python .\python_boilerplate\demo\pandas_usage.py
-$ $env:PYTHONPATH=$PWD.Path; poetry run python .\python_boilerplate\demo\multithread_and_thread_pool_usage.py
+$ $env:PYTHONPATH=$PWD.Path; uv run python .\python_boilerplate\demo\pandas_usage.py
+$ $env:PYTHONPATH=$PWD.Path; uv run python .\python_boilerplate\demo\multithread_and_thread_pool_usage.py
 
 # Run the main module
-$ $env:PYTHONPATH=$PWD.Path; poetry run python .\python_boilerplate\__main__.py
+$ $env:PYTHONPATH=$PWD.Path; uv run python .\python_boilerplate\__main__.py
 ```
 
 ### Package with [PyInstaller](https://pyinstaller.org/en/latest/usage.html?highlight=pythonpath#using-pyinstaller)
@@ -172,7 +169,7 @@ $ $env:PYTHONPATH=$PWD.Path; poetry run python .\python_boilerplate\__main__.py
 
 Build artifact with macOS or Linux,
 ```shell
-$ poetry run pyinstaller --console \
+$ uv run pyinstaller --console \
 --add-data "pyproject.toml:." \
 --add-data "src/python_boilerplate/resources/*:python_boilerplate/resources" \
 --name pandas_usage \
@@ -181,7 +178,7 @@ $ poetry run pyinstaller --console \
 
 On Windows,
 ```powershell
-$ poetry run pyinstaller --console `
+$ uv run pyinstaller --console `
 --add-data "pyproject.toml;." `
 --add-data "src/python_boilerplate/resources/*;python_boilerplate/resources" `
 --name multithread_and_thread_pool_usage `
@@ -193,13 +190,13 @@ $ poetry run pyinstaller --console `
 Run with pytest, analyze code coverage, generate HTML code coverage reports, fail the test if coverage percentage is under 90%,
 
 ```shell
-$ poetry run pytest --cov --cov-report html --cov-fail-under=85 --capture=no --log-cli-level=INFO
+$ uv run pytest --cov --cov-report html --cov-fail-under=85 --capture=no --log-cli-level=INFO
 ```
 
 Benchmark with pytest,
 
 ```shell
-$ poetry run pytest --capture=no --log-cli-level=ERROR -n 0 --benchmark-only
+$ uv run pytest --capture=no --log-cli-level=ERROR -n 0 --benchmark-only
 ```
 
 ### Conventional Changelog CLI
@@ -225,7 +222,7 @@ $ poetry run pytest --capture=no --log-cli-level=ERROR -n 0 --benchmark-only
 ### Check Versions of Python Packages
 
 ```shell
-$ poetry run pip list --outdated
+$ uv pip list --outdated
 ```
 
 Output be like,

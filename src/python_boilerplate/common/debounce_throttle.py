@@ -1,15 +1,12 @@
-from __future__ import annotations
-
 import functools
 import time
-from typing import Any, Callable, TypeVar
+from collections.abc import Callable
+from typing import Any
 
 from loguru import logger
 
-R = TypeVar("R")
 
-
-def debounce(wait: float) -> Callable[..., Callable[..., R | None]]:
+def debounce[R](wait: float) -> Callable[..., Callable[..., R | None]]:
     """
     Debounce function decorator.
 
@@ -37,7 +34,7 @@ def debounce(wait: float) -> Callable[..., Callable[..., R | None]]:
     return decorator
 
 
-def throttle(limit: float) -> Callable[..., Callable[..., R | None]]:
+def throttle[R](limit: float) -> Callable[..., Callable[..., R | None]]:
     """
     Throttle function decorator.
 

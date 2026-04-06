@@ -37,7 +37,7 @@ def test_pandas_data_structure_series() -> None:
 @cpu_profile("INFO")
 def test_pandas_data_structure_date_range() -> None:
     dates: DatetimeIndex = pandas_data_structure_date_range()
-    assert dates.dtype == np.dtype("datetime64[ns]")
+    assert dates.dtype == np.dtype("datetime64[us]")
     assert len(dates) == 6
     date1 = dates.array[0].date()
     logger.info(f"date 1: {date1}")
