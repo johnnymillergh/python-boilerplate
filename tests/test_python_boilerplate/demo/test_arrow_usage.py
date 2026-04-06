@@ -18,16 +18,16 @@ def test_string_to_datetime() -> None:
 
 def test_convert_time_zone() -> None:
     now = arrow.now()
-    converted = convert_time_zone(now, "UTC+0")
-    logger.info(f"Now: {now}, converted UTC+0: {converted}")
+    converted = convert_time_zone(now, "UTC")
+    logger.info(f"Now: {now}, converted UTC: {converted}")
     assert converted is not None
-    converted = convert_time_zone(converted, "UTC+1")
+    converted = convert_time_zone(converted, "+01:00")
     tzinfo = converted.tzinfo
     assert tzinfo is not None
-    logger.info(f"Now: {now}, converted UTC+1: {converted}")
+    logger.info(f"Now: {now}, converted +01:00: {converted}")
     assert converted is not None
-    converted = convert_time_zone(converted.shift(days=-1), "UTC+2")
-    logger.info(f"Now: {now}, converted UTC+2: {converted}")
+    converted = convert_time_zone(converted.shift(days=-1), "+02:00")
+    logger.info(f"Now: {now}, converted +02:00: {converted}")
     assert converted is not None
     assert converted < now
     logger.info(f"Now: {now}, converted: {converted}")

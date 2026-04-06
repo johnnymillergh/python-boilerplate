@@ -1,26 +1,18 @@
 name: Project Environment Setup
-description: Setup project environment
+description: Setup project environment with uv
 runs:
   using: "composite"
   steps:
-    - name: Install Poetry
-      shell: bash
-      run: pipx install poetry==2.1.4
-    # The actions/cache step below uses this id to get the exact python version
-    - id: setup-python
-      uses: actions/setup-python@v5
+    # https://docs.astral.sh/uv/guides/integration/github/
+    - name: Install uv
+      uses: astral-sh/setup-uv@cec208311dfd045dd5311c1add060b2062131d57
       with:
-        python-version: "3.13.7"
-        architecture: x64
-        # https://github.com/actions/setup-python/blob/main/docs/advanced-usage.md#caching-packages
-        cache: "poetry"
-    # https://github.com/actions/cache/blob/main/examples.md#python---pipenv
-    - id: cache-pipenv
-      uses: actions/cache@v3
-      with:
-        path: ~/.local/share/virtualenvs
-        key: ${{ runner.os }}-python-${{ steps.setup-python.outputs.python-version }}-poetry-${{ hashFiles('poetry.lock') }}
-    - name: Install Dependencies with Poetry
-      if: steps.cache-pipenv.outputs.cache-hit != 'true'
+        # The version of uv to install (default: searches for version in config files, then latest)
+        version: ""
+        enable-cache: true
+    - name: Set up Python
       shell: bash
-      run: poetry install --with test
+      run: uv python install
+    - name: Install Dependencies with uv
+      shell: bash
+      run: uv sync --all-extras

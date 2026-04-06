@@ -8,10 +8,10 @@ jobs:
   docker:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v2
+    - uses: actions/checkout@v4
 
     - name: Publish to GitHub Packages
-      uses: whoan/docker-build-with-cache-action@v2
+      uses: whoan/docker-build-with-cache-action@v6
       with:
         registry: docker.pkg.github.com
         username: ${{ github.actor }}
