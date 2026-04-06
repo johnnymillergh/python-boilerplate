@@ -1,6 +1,6 @@
 [project]
 name = "python-boilerplate"
-version = "8.2-beta"
+version = "8.2"
 description = "A boilerplate project for Python."
 authors = [
     { name = "Johnny Miller", email = "johnnysviva@outlook.com" }
