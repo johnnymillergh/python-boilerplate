@@ -1,19 +1,19 @@
 ![Python Boilerplate Social Image](./python_boilerplate.png)
-[![GitHub release](https://img.shields.io/github/release/johnnymillergh/python_boilerplate.svg)](https://github.com/johnnymillergh/python_boilerplate/releases)
-[![Github Actions workflow status](https://github.com/johnnymillergh/python_boilerplate/actions/workflows/main.yml/badge.svg?branch=main)](https://github.com/johnnymillergh/python_boilerplate/actions)
-[![GitHub issues](https://img.shields.io/github/issues/johnnymillergh/python_boilerplate)](https://github.com/johnnymillergh/python_boilerplate/issues)
-[![GitHub forks](https://img.shields.io/github/forks/johnnymillergh/python_boilerplate)](https://github.com/johnnymillergh/python_boilerplate/network)
-[![GitHub stars](https://img.shields.io/github/stars/johnnymillergh/python_boilerplate)](https://github.com/johnnymillergh/python_boilerplate)
-[![GitHub license](https://img.shields.io/github/license/johnnymillergh/python_boilerplate)](https://github.com/johnnymillergh/python_boilerplate/blob/master/LICENSE)
-[![GitHub code size in bytes](https://img.shields.io/github/languages/code-size/johnnymillergh/python_boilerplate.svg?style=popout)](https://github.com/johnnymillergh/python_boilerplate)
-[![GitHub repo size](https://img.shields.io/github/repo-size/johnnymillergh/python_boilerplate.svg)](https://github.com/johnnymillergh/python_boilerplate)
-[![Twitter](https://img.shields.io/twitter/url/https/github.com/johnnymillergh/python_boilerplate?style=social)](https://twitter.com/intent/tweet?text=Wow:&url=https%3A%2F%2Fgithub.com%2Fjohnnymillergh%2Fpython_boilerplate)
+[![GitHub release](https://img.shields.io/github/release/johnnymillergh/python-boilerplate.svg)](https://github.com/johnnymillergh/python-boilerplate/releases)
+[![Github Actions workflow status](https://github.com/johnnymillergh/python-boilerplate/actions/workflows/main.yml/badge.svg?branch=main)](https://github.com/johnnymillergh/python-boilerplate/actions)
+[![GitHub issues](https://img.shields.io/github/issues/johnnymillergh/python-boilerplate)](https://github.com/johnnymillergh/python-boilerplate/issues)
+[![GitHub forks](https://img.shields.io/github/forks/johnnymillergh/python-boilerplate)](https://github.com/johnnymillergh/python-boilerplate/network)
+[![GitHub stars](https://img.shields.io/github/stars/johnnymillergh/python-boilerplate)](https://github.com/johnnymillergh/python-boilerplate)
+[![GitHub license](https://img.shields.io/github/license/johnnymillergh/python-boilerplate)](https://github.com/johnnymillergh/python-boilerplate/blob/master/LICENSE)
+[![GitHub code size in bytes](https://img.shields.io/github/languages/code-size/johnnymillergh/python-boilerplate.svg?style=popout)](https://github.com/johnnymillergh/python-boilerplate)
+[![GitHub repo size](https://img.shields.io/github/repo-size/johnnymillergh/python-boilerplate.svg)](https://github.com/johnnymillergh/python-boilerplate)
+[![Twitter](https://img.shields.io/twitter/url/https/github.com/johnnymillergh/python-boilerplate?style=social)](https://twitter.com/intent/tweet?text=Wow:&url=https%3A%2F%2Fgithub.com%2Fjohnnymillergh%2Fpython-boilerplate)
 
 # Python Boilerplate
 
 **python_boilerplate** is a boilerplate project for Python. Based on template [sourcery-ai/python-best-practices-cookiecutter](https://github.com/sourcery-ai/python-best-practices-cookiecutter).
 
-[Official Docker Image](https://github.com/johnnymillergh/python_boilerplate/pkgs/container/python_boilerplate%2Fpython_boilerplate)
+[Official Docker Image](https://github.com/johnnymillergh/python-boilerplate/pkgs/container/python_boilerplate%2Fpython_boilerplate)
 
 ## Features
 
